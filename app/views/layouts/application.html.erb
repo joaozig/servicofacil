@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? "#{yield(:title)} - Serviço Fácil" : "Serviço Fácil" %></title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag "application" %>
+    <%= yield :head %>
+
+    <!-- For third-generation iPad with high-resolution Retina display: -->
+    <!-- Size should be 144 x 144 pixels -->
+    <%= favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144' %>
+
+    <!-- For iPhone with high-resolution Retina display: -->
+    <!-- Size should be 114 x 114 pixels -->
+    <%= favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114' %>
+
+    <!-- For first- and second-generation iPad: -->
+    <!-- Size should be 72 x 72 pixels -->
+    <%= favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72' %>
+
+    <!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+    <!-- Size should be 57 x 57 pixels -->
+    <%= favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png' %>
+
+    <!-- For all other devices -->
+    <!-- Size should be 32 x 32 pixels -->
+    <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js" type="text/javascript"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+      <!-- Navigation -->
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          <div class="container">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+                  <%= link_to image_tag("http://placehold.it/150x50&text=Logo"), root_path, class: "navbar-brand" %>
+              </div>
+              <!-- Collect the nav links, forms, and other content for toggling -->
+              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav">
+                      <li><%= link_to "Sobre Nós", sobre_path %></li>
+                      <li><%= link_to "Como Funciona", como_funciona_path %></li>
+                      <li><%= link_to "Anúncios", anuncios_path %></li>
+                      <li><%= link_to "Contato", contato_path %></li>
+                  </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                    <li><%= link_to "Cadastrar Anúncio", cadastro_path %></li>
+                    <li class="dropdown">
+
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <% if advertiser_signed_in? %>
+                          <%= "Olá, #{current_advertiser.name}" %>
+                        <% else %>
+                          Minha Conta
+                        <% end %>
+                        <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+
+                          <% if advertiser_signed_in? %>
+                              <li><%= link_to "Meus anúncios", advertisers_ads_path %></li>
+                              <li><%= link_to "Alterar dados e senha", edit_advertiser_registration_path %></li>
+                              <li>
+                                  <hr />
+                                  <%= link_to "Sair", logout_path %>
+                              </li>
+                          <% else %>
+                              <li><%= link_to "Entrar", login_path %></li>
+                              <li><%= link_to "Cadastro", cadastro_path %></li>
+                          <% end %>
+
+                        </ul>
+                    </li>
+                </ul>
+              </div>
+              <!-- /.navbar-collapse -->
+          </div>
+          <!-- /.container -->
+      </nav>
+
+      <!-- Page Content -->
+      <div class="container">
+        <%= bootstrap_flash %>
+
+        <%= yield %>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Your Website 2014</p>
+                </div>
+            </div>
+        </footer>
+
+      </div>
+      <!-- /.container -->
+
+      <%= javascript_include_tag "application" %>
+      <%= yield :footer %>
+  </body>
+</html>

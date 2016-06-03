@@ -1,0 +1,59 @@
+<%= form_for @ad, url: locals[:url_action], :html => { :class => "form-horizontal ad" } do |f| %>
+
+  <% if @ad.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@ad.errors.count, "error") %> prohibited this ad from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @ad.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :title, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :title, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:title) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :subtitle, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :subtitle, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:subtitle) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :subcategory_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.grouped_collection_select(:subcategory_id, Category.all, :subcategories, :name, :id, :name,
+                              { prompt: "Selecione uma categoria" },
+                              { class: 'form-control' } 
+                             )
+      %>
+    </div>
+    <%=f.error_span(:subtitle) %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :description, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:description) %>
+  </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                advertisers_ads_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>
