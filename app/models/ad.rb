@@ -6,4 +6,6 @@ class Ad < ActiveRecord::Base
 
 	validates :title, presence: true
 	validates :subcategory, presence: true
+
+	scope :approved, -> { where(status: Ad.statuses[:approved]).order(premium: :desc, title: :asc) }
 end
