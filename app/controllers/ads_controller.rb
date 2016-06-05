@@ -1,6 +1,6 @@
 class AdsController < ApplicationController
 
 	def index
-		@ads = Ad.approved
+		@ads = Ad.approved.paginate(page: params[:page])
 	end
 end
