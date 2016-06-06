@@ -1,6 +1,15 @@
 Rails.application.routes.draw do
 
+  devise_for :users, controllers: { :sessions => "admin/sessions" }
+  devise_scope :user do
+    get 'admin/login', to: 'admin/sessions#new'
+    get 'admin/logout', to: 'admin/sessions#destroy'
+  end
+
   namespace :admin do
+    get '/', to: 'dashboard#index'
+    get 'dashboard', to: 'dashboard#index'
+    resources :users
     resources :subcategories
     resources :categories
   end

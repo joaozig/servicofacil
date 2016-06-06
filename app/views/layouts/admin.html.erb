@@ -53,7 +53,25 @@
             <li><%= link_to "Link3", "/path3"  %></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><%= link_to "teste", "/teste" %></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <% if user_signed_in? %>
+                  <%= "Olá, #{current_user.name}" %>
+                <% else %>
+                  Minha Conta
+                <% end %>
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu">
+
+                <% if user_signed_in? %>
+                    <li><%= link_to "Alterar dados e senha", '#' %></li>
+                    <li>
+                        <%= link_to "Sair", admin_logout_path %>
+                    </li>
+                <% end %>
+              </ul>
+            </li>
           </ul>
         </div>
       </div>
