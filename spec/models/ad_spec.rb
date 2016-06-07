@@ -25,11 +25,11 @@ RSpec.describe Ad, type: :model do
 
 	describe 'Listing ads' do
 		it 'approved ads with premiums first' do
-			Ad.new(title: "Anuncio 1", status: Ad.statuses[:approved], premium:false , subcategory: subcategory).save!
-			Ad.new(title: "Anuncio 2", status: Ad.statuses[:pending], subcategory: subcategory).save!
-			Ad.new(title: "Anuncio 3", status: Ad.statuses[:rejected], premium:true, subcategory: subcategory).save!
-			Ad.new(title: "Anuncio 4", status: Ad.statuses[:approved], premium: true, subcategory: subcategory).save!
-			Ad.new(title: "Anuncio 0", status: Ad.statuses[:approved], subcategory: subcategory).save! # creating without premium
+			Ad.new(title: "Anuncio 1", status: :approved, premium:false , subcategory: subcategory).save!
+			Ad.new(title: "Anuncio 2", status: :pending, subcategory: subcategory).save!
+			Ad.new(title: "Anuncio 3", status: :rejected, premium:true, subcategory: subcategory).save!
+			Ad.new(title: "Anuncio 4", status: :approved, premium: true, subcategory: subcategory).save!
+			Ad.new(title: "Anuncio 0", status: :approved, subcategory: subcategory).save! # creating without premium
 			Ad.new(title: "Anuncio 6", premium: true, subcategory: subcategory).save! # creating without status
 
 			ads = Ad.approved

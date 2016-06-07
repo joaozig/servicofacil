@@ -11,13 +11,13 @@ feature 'Edit Advertiser' do
 	end
 
 	scenario 'ok if logged' do
-		login_as(advertiser1)
+		login_as(advertiser1, scope: :advertiser)
 	  visit edit_advertiser_registration_path
 	  expect(page).to have_content('Edit Advertiser')
 	end
 
 	scenario 'with valid inputs' do
-		login_as(advertiser1)
+		login_as(advertiser1, scope: :advertiser)
 	  visit edit_advertiser_registration_path
 	  fill_in 'advertiser_name', with: 'João Ricardo'
 	  fill_in 'advertiser_email', with: 'joaoricardobastos@gmail.com.br'
@@ -29,7 +29,7 @@ feature 'Edit Advertiser' do
 	end
 
 	scenario 'fails when leaves current password blank' do
-		login_as(advertiser1)
+		login_as(advertiser1, scope: :advertiser)
 	  visit edit_advertiser_registration_path
 	  fill_in 'advertiser_name', with: 'João Ricardo!'
 	  fill_in 'advertiser_email', with: 'joaoricardobastos@gmail.com.br'
@@ -41,7 +41,7 @@ feature 'Edit Advertiser' do
 	end
 
 	scenario 'fails when fills with wrong current password' do
-		login_as(advertiser1)
+		login_as(advertiser1, scope: :advertiser)
 	  visit edit_advertiser_registration_path
 	  fill_in 'advertiser_name', with: 'João Ricardo!'
 	  fill_in 'advertiser_email', with: 'joaoricardobastos@gmail.com.br'
@@ -54,7 +54,7 @@ feature 'Edit Advertiser' do
 	end
 
 	scenario 'fails when fills with existent email' do
-		login_as(advertiser1)
+		login_as(advertiser1, scope: :advertiser)
 		advertiser2.save!
 	  visit edit_advertiser_registration_path
 	  fill_in 'advertiser_name', with: 'João Ricardo!'

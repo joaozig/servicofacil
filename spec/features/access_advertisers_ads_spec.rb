@@ -13,13 +13,13 @@ feature 'Advertisers Ads restricted area' do
 	end
 
 	scenario 'ok if logged' do
-		login_as(advertiser1)
+		login_as(advertiser1, scope: :advertiser)
 	  visit advertisers_ads_path
 	  expect(page).to have_content('Ads')
 	end
 
 	scenario 'edit own ad' do
-		login_as(advertiser1)
+		login_as(advertiser1, scope: :advertiser)
 
 		ad = Ad.new(title: "teste", advertiser: advertiser1, subcategory: subcategory)
 		ad.save!
@@ -30,7 +30,7 @@ feature 'Advertisers Ads restricted area' do
 	end
 
 	scenario 'fails when edit own ad with blank title' do
-		login_as(advertiser1)
+		login_as(advertiser1, scope: :advertiser)
 
 		ad = Ad.new(title: "teste", advertiser: advertiser1, subcategory: subcategory)
 		ad.save!
@@ -41,7 +41,7 @@ feature 'Advertisers Ads restricted area' do
 	end
 
 	scenario 'show own ad' do
-		login_as(advertiser1)
+		login_as(advertiser1, scope: :advertiser)
 
 		ad = Ad.new(title: "teste", advertiser: advertiser1, subcategory: subcategory)
 		ad.save!
@@ -50,7 +50,7 @@ feature 'Advertisers Ads restricted area' do
 	end
 
 	scenario 'delete own ad' do
-		login_as(advertiser1)
+		login_as(advertiser1, scope: :advertiser)
 
 		ad = Ad.new(title: "teste", advertiser: advertiser1, subcategory: subcategory)
 		ad.save!
@@ -62,7 +62,7 @@ feature 'Advertisers Ads restricted area' do
 	end
 
 	scenario 'fails when try to access ad edit page from other advertiser' do
-		login_as(advertiser1)
+		login_as(advertiser1, scope: :advertiser)
 
 		advertiser2.save!
 		ad = Ad.new(title: "teste2", advertiser: advertiser2, subcategory: subcategory)
@@ -72,7 +72,7 @@ feature 'Advertisers Ads restricted area' do
 	end
 
 	scenario 'fails when show ad from other advertiser' do
-		login_as(advertiser1)
+		login_as(advertiser1, scope: :advertiser)
 
 		advertiser2.save!
 		ad = Ad.new(title: "teste2", advertiser: advertiser2, subcategory: subcategory)
