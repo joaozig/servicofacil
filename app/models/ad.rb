@@ -6,4 +6,9 @@ class Ad < ActiveRecord::Base
 
 	validates :title, presence: true
 	validates :subcategory, presence: true
+
+	# WillPaginate default config
+	self.per_page = 10
+
+	scope :approved, -> { where(status: Ad.statuses[:approved]).order(premium: :desc, title: :asc) }
 end

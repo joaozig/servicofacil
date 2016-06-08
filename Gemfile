@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# Pagination library for Rails
+gem 'will_paginate', '~> 3.1.0'
+gem 'will_paginate-bootstrap'
 # Twitter Bootstrap for Rails 3.x - 4 Asset Pipeline
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS

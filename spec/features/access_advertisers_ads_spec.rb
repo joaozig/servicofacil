@@ -13,13 +13,35 @@ feature 'Advertisers Ads restricted area' do
 	end
 
 	scenario 'ok if logged' do
-		login_as(advertiser1)
+		login_as(advertiser1, scope: :advertiser)
 	  visit advertisers_ads_path
 	  expect(page).to have_content('Ads')
 	end
 
-	scenario 'ok show own ad' do
-		login_as(advertiser1)
+	scenario 'edit own ad' do
+		login_as(advertiser1, scope: :advertiser)
+
+		ad = Ad.new(title: "teste", advertiser: advertiser1, subcategory: subcategory)
+		ad.save!
+	  visit edit_advertisers_ad_path(ad)
+	  fill_in 'ad_title', with: 'Anuncio editado'
+	  click_on 'Update Ad'
+	  expect(page).to have_content('Ad was successfully updated')
+	end
+
+	scenario 'fails when edit own ad with blank title' do
+		login_as(advertiser1, scope: :advertiser)
+
+		ad = Ad.new(title: "teste", advertiser: advertiser1, subcategory: subcategory)
+		ad.save!
+	  visit edit_advertisers_ad_path(ad)
+	  fill_in 'ad_title', with: ''
+	  click_on 'Update Ad'
+	  expect(page).to have_content("Title can't be blank")
+	end
+
+	scenario 'show own ad' do
+		login_as(advertiser1, scope: :advertiser)
 
 		ad = Ad.new(title: "teste", advertiser: advertiser1, subcategory: subcategory)
 		ad.save!
@@ -27,8 +49,30 @@ feature 'Advertisers Ads restricted area' do
 	  expect(page).to have_content('teste')
 	end
 
-	scenario 'fail show ad from other advertiser' do
-		login_as(advertiser1)
+	scenario 'delete own ad' do
+		login_as(advertiser1, scope: :advertiser)
+
+		ad = Ad.new(title: "teste", advertiser: advertiser1, subcategory: subcategory)
+		ad.save!
+
+	  visit advertisers_ads_path
+	  click_on 'Delete'
+
+	  expect(page).to have_content('Ad was successfully destroyed')
+	end
+
+	scenario 'fails when try to access ad edit page from other advertiser' do
+		login_as(advertiser1, scope: :advertiser)
+
+		advertiser2.save!
+		ad = Ad.new(title: "teste2", advertiser: advertiser2, subcategory: subcategory)
+		ad.save!
+	  visit edit_advertisers_ad_path(ad)
+	  expect(page).to_not have_content('Edit Ad')
+	end
+
+	scenario 'fails when show ad from other advertiser' do
+		login_as(advertiser1, scope: :advertiser)
 
 		advertiser2.save!
 		ad = Ad.new(title: "teste2", advertiser: advertiser2, subcategory: subcategory)
