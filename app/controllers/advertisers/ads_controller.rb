@@ -5,8 +5,7 @@ class Advertisers::AdsController < ApplicationController
   # GET /ads
   # GET /ads.json
   def index
-    # @ads = Ad.all
-    @ads = current_advertiser.ads
+    @ads = current_advertiser.ads.paginate(page: params[:page])
   end
 
   # GET /ads/1
