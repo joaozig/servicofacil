@@ -35,3 +35,11 @@
     <% end %>
   </tbody>
 </table>
+
+<div class="row text-center">
+    <div class="col-lg-12">
+        <%= will_paginate @categories, renderer: BootstrapPagination::Rails,
+                                       previous_label: '&laquo;',
+                                       next_label: '&raquo;' %>
+    </div>
+</div>

@@ -23,4 +23,7 @@ module Sf
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
   end
+
+  # Default WillPaginate per_page config
+  WillPaginate.per_page = 30
 end
