@@ -4,6 +4,4 @@ class Subcategory < ActiveRecord::Base
 
   validates :name, presence: true
   validates :category, presence: true
-
-	default_scope { order(name: :asc) }
 end

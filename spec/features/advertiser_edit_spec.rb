@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Edit Advertiser' do
 
 	subject(:advertiser1) { advertiser1 = Advertiser.create(name: "João", email: "joaoricardobastos@gmail.com", password: "joaozig") }
-	subject(:advertiser2) { advertiser2 = Advertiser.create(name: "Aroldo", email: "joaoricardobastos@hotmail.com", password: "joaozig") }
+	subject(:advertiser2) { advertiser2 = Advertiser.create(name: "Zaroldo", email: "joaoricardobastos@hotmail.com", password: "joaozig") }
 
 	scenario 'forbidden if not logged' do
 	  visit edit_advertiser_registration_path
