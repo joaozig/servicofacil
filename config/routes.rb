@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/', to: 'dashboard#index'
     get 'dashboard', to: 'dashboard#index'
+    get 'edit_profile', to: 'users#edit_profile'
+    patch 'update_profile', to: 'users#update_profile'
     resources :users
     resources :subcategories
     resources :categories

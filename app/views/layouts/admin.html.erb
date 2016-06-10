@@ -66,7 +66,7 @@
               <ul class="dropdown-menu">
 
                 <% if user_signed_in? %>
-                    <li><%= link_to "Alterar dados e senha", '#' %></li>
+                    <li><%= link_to "Alterar dados", admin_edit_profile_path %></li>
                     <li>
                         <%= link_to "Sair", admin_logout_path %>
                     </li>
