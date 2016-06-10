@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :advertisers
   devise_for :users, controllers: { :sessions => "admin/sessions" }
   devise_scope :user do
     get 'admin/login', to: 'admin/sessions#new'
@@ -12,6 +13,7 @@ Rails.application.routes.draw do
     resources :users
     resources :subcategories
     resources :categories
+    resources :advertisers, only: [:index, :show, :edit, :update, :destroy]
   end
 
   namespace :advertisers do
@@ -23,8 +25,6 @@ Rails.application.routes.draw do
     get 'logout', to: 'devise/sessions#destroy'
     get 'cadastro', to: 'devise/registrations#new'
   end
-
-  devise_for :advertisers
 
   get 'sobre' => 'static_pages#about'
   get 'como-funciona' => 'static_pages#how_works'
