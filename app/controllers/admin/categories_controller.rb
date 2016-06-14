@@ -4,7 +4,7 @@ class Admin::CategoriesController < AdminController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all.paginate(page: params[:page])
+    @categories = Category.all.paginate(page: params[:page]).order(name: :asc)
   end
 
   # GET /categories/1

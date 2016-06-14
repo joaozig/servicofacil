@@ -4,7 +4,7 @@ class Admin::SubcategoriesController < AdminController
   # GET /subcategories
   # GET /subcategories.json
   def index
-    @subcategories = Subcategory.all.paginate(page: params[:page])
+    @subcategories = Subcategory.all.paginate(page: params[:page]).order(name: :asc)
   end
 
   # GET /subcategories/1

@@ -4,7 +4,7 @@ class Admin::AdvertisersController < AdminController
   # GET /advertisers
   # GET /advertisers.json
   def index
-    @advertisers = Advertiser.all.paginate(page: params[:page])
+    @advertisers = Advertiser.all.paginate(page: params[:page]).order(name: :asc)
   end
 
   # GET /advertisers/1
