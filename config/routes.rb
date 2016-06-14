@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     get '/', to: 'dashboard#index'
     get 'dashboard', to: 'dashboard#index'
     get 'edit_profile', to: 'users#edit_profile'
-    patch 'update_profile', to: 'users#update_profile'
+    match 'update_profile', to: 'users#update_profile', via: [:patch, :put]
     resources :users
     resources :subcategories
     resources :categories
